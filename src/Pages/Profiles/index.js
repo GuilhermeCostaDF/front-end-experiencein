@@ -59,9 +59,16 @@ export default function Profiles() {
     <>
       <Header nome={currentProfile?.nome} />
       <div className="profiles">
+        {/* div criada para mostrar  a mensagem de sucesso no envio do convite */}
+        {message ? (
+          <div className="mensagem-convite">
+            <span>{message} &#128513;&#10024;</span>
+          </div>
+        ) : null}
         <div className="invite">
           {profiles?.map((profile) =>
-            profile.id === currentProfile?.id ? null : (
+            profile.id === currentProfile?.id ||
+            !profile.pode_convidar ? null : (
               <div key={profile.id}>
                 <div className="card">
                   <h3>{profile.nome}</h3>
@@ -83,20 +90,22 @@ export default function Profiles() {
         {/* div para mostrar os convites */}
         <div className="invitations">
           <h2>Invites </h2>
-          {invites?.map((invite) => (
-            <div className="invitation-card" key={invite.id}>
-              <h3>{invite.nome}</h3>
-              <button onClick={() => accept(invite.inviteId)}>Confirm</button>
-            </div>
-          ))}
+          {invites != 0 ? (
+            <>
+              {invites?.map((invite) => (
+                <div className="invitation-card" key={invite.inviteId}>
+                  <h3>{invite.nome}</h3>
+                  <button onClick={() => accept(invite.inviteId)}>
+                    Confirm
+                  </button>
+                </div>
+              ))}
+            </>
+          ) : (
+            <span>No Invitations yet! &#128546;</span>
+          )}
         </div>
       </div>
-      {/* div criada para mostrar  a mensagem de sucesso no envio do convite */}
-      {message ? (
-        <div className="mensagem-convite">
-          <span>{message} &#128513;&#10024;</span>
-        </div>
-      ) : null}
       {/* div para mostrar os contatos */}
       <div className="contacts">
         <h2>Contacts</h2>

@@ -96,3 +96,10 @@
 .link span {
   margin-right: 10px;
 }
+
+.error{
+  text-align: center;
+  width: 100%;
+  color: rgb(255, 23, 23);
+  margin-top: 1rem;
+}
